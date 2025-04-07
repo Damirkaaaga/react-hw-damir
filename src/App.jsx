@@ -1,18 +1,7 @@
-import "./App.css";
+import MenuPage from "./pages/MenuPage";
 
 function App() {
-  const fruits = ["Apple", "Banana", "Orange"];
-
-  return (
-    <div>
-      <h1>My Fruit List</h1>
-      <ul>
-        {fruits.map((fruit, index) => (
-          <li key={index}>{fruit}</li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MenuPage />;
 }
 
 export default App;

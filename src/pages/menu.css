@@ -1,0 +1,98 @@
+.menu-wrapper {
+  position: relative;
+  padding: 154px 120px 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.menu-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: #f5fbfc;
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+  z-index: -1;
+}
+
+.menu-container {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.menu-title {
+  font-family: "Inter", sans-serif;
+  font-size: 50px;
+  line-height: 55px;
+  letter-spacing: 1.65px;
+  font-weight: 400;
+  text-align: center;
+  color: #35b8be;
+  margin-bottom: 26px;
+}
+
+.menu-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0.36px;
+  font-weight: 400;
+  color: #546285;
+  text-align: center;
+  margin-bottom: 50.45px;
+}
+
+.menu-buttons {
+  width: 1200px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto 2rem;
+}
+
+.menu-btn {
+  width: auto;
+  height: 52px;
+  padding: 0 32px;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  background-color: white;
+  color: #222222;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.menu-btn.active {
+  background-color: #35b8be;
+  color: white;
+  border: none;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(580px, 1fr));
+  gap: 20px 0;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.menu-btn-see-more {
+  background-color: #35b8be;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+}
