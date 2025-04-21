@@ -1,33 +1,17 @@
 import { useState } from "react";
+import "./Tooltip.css";
 
 function Tooltip({ children, tooltipText }) {
   const [show, setShow] = useState(false);
 
   return (
     <span
-      style={{ position: "relative", cursor: "pointer", color: "blue" }}
+      className="tooltip-wrapper"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
     >
       {children}
-      {show && (
-        <div
-          style={{
-            position: "absolute",
-            background: "black",
-            color: "white",
-            padding: "4px 8px",
-            borderRadius: "4px",
-            top: "100%",
-            left: "0",
-            whiteSpace: "nowrap",
-            marginTop: "5px",
-            fontSize: "12px"
-          }}
-        >
-          {tooltipText}
-        </div>
-      )}
+      {show && <div className="tooltip-box">{tooltipText}</div>}
     </span>
   );
 }

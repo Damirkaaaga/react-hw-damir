@@ -1,0 +1,19 @@
+.tooltip-wrapper {
+  position: relative;
+  cursor: pointer;
+  color: blue;
+}
+
+.tooltip-box {
+  position: absolute;
+  background: black;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+  margin-top: 5px;
+  font-size: 12px;
+  z-index: 10;
+}
