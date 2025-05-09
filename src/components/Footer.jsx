@@ -1,3 +1,4 @@
+import React from "react";
 import "./Footer.css";
 
 const footerLinks = [
@@ -15,7 +16,7 @@ const footerLinks = [
   },
 ];
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -35,7 +36,18 @@ function Footer() {
               <ul className="footer-list">
                 {items.map((item) => (
                   <li className="footer-list-item" key={item}>
-                    {item}
+                    {title === "Template" ? (
+                      <a
+                        href="https://www.google.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="footer-link"
+                      >
+                        {item}
+                      </a>
+                    ) : (
+                      <span>{item}</span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -62,6 +74,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

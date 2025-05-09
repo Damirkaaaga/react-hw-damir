@@ -1,6 +1,7 @@
+import React from "react";
 import "./Header.css";
 
-function Header() {
+const Header = ({ totalItems }) => {
   return (
     <header className="header">
       <div className="header-container">
@@ -20,12 +21,12 @@ function Header() {
               alt="basket"
               className="cart-icon"
             />
-            <span className="cart-badge">0</span>
+            <span className="cart-badge">{totalItems}</span>
           </div>
         </nav>
       </div>
     </header>
   );
-}
+};
 
 export default Header;
