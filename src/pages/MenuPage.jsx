@@ -9,13 +9,23 @@ const MenuPage = () => {
   const [meals, setMeals] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
   const [cart, setCart] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState("Dessert");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
       .then((res) => res.json())
       .then((data) => {
         setMeals(data);
+
+        const availableCategories = [
+          ...new Set(data.map((item) => item.category)),
+        ];
+
+        if (availableCategories.includes("Dessert")) {
+          setSelectedCategory("Dessert");
+        } else {
+          setSelectedCategory(availableCategories[0] || "");
+        }
       });
   }, []);
 
