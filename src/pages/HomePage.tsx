@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
 
 const BgContainer = styled.div`
   position: relative;
@@ -94,7 +94,7 @@ const ImageBlock = styled.div`
   }
 `;
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
   return (
     <>
       <Header totalItems={0} />
@@ -127,4 +127,6 @@ export default function HomePage() {
       <Footer />
     </>
   );
-}
+};
+
+export default HomePage;

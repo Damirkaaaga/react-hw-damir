@@ -1,8 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./MenuItem.css";
 
-const MenuItem = ({
+type MenuItemProps = {
+  image: string;
+  title: string;
+  price: number;
+  quantity: number;
+  onAddToCart: () => void;
+  area?: string;
+  category?: string;
+};
+
+const MenuItem: React.FC<MenuItemProps> = ({
   image,
   title,
   price,
@@ -42,16 +51,6 @@ const MenuItem = ({
       </div>
     </div>
   );
-};
-
-MenuItem.propTypes = {
-  image: PropTypes.string,
-  title: PropTypes.string,
-  price: PropTypes.number,
-  quantity: PropTypes.number,
-  onAddToCart: PropTypes.func,
-  area: PropTypes.string,
-  category: PropTypes.string,
 };
 
 export default MenuItem;

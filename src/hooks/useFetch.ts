@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url, options = {}) => {
-  const [data, setData] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [error, setError] = useState(null);
+type FetchOptions = RequestInit;
+
+type UseFetchResult<T> = {
+  data: T | null;
+  status: number | string | null;
+  error: unknown;
+};
+
+const useFetch = <T = unknown>(
+  url: string,
+  options: FetchOptions = {}
+): UseFetchResult<T> => {
+  const [data, setData] = useState<T | null>(null);
+  const [status, setStatus] = useState<number | string | null>(null);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
     const fetchData = async () => {

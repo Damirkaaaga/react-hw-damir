@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
-import useLogger from "../../hooks/useLogger";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  User,
+} from "firebase/auth";
+import { auth } from "../../firebase.ts";
+import useLogger from "../../hooks/useLogger.ts";
 import "./LoginPage.css";
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -22,7 +26,7 @@ const LoginPage = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -34,23 +38,25 @@ const LoginPage = () => {
       alert("Login successful");
       setUser(userCredential.user);
       useLogger("LoginSuccess", { email });
-    } catch (error) {
-      console.error("Login error:", error.message);
-      alert("Login failed: " + error.message);
-      useLogger("LoginError", { email, error: error.message });
+    } catch (error: unknown) {
+      const err = error as { message: string };
+      console.error("Login error:", err.message);
+      alert("Login failed: " + err.message);
+      useLogger("LoginError", { email, error: err.message });
     }
   };
 
   const handleLogout = () => {
     auth.signOut();
-    useLogger("Logout", { email: user.email });
+    if (user) {
+      useLogger("Logout", { email: user.email });
+    }
+    setUser(null);
   };
 
   return (
     <div className="login-wrapper">
-      {/* Добавляем угол СЛЕВА ВНИЗ */}
       <div className="background-angle"></div>
-
       <h1 className="login-title">Log in</h1>
       {user ? (
         <div>
