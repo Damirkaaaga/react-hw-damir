@@ -1,13 +1,13 @@
 import React from "react";
-import LoginPage from "./pages/Login/LoginPage.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
+import MenuPage from "./pages/MenuPage.tsx"; 
 
 const App: React.FC = () => {
   return (
     <div>
-      <Header totalItems={0} />
-      <LoginPage />
+      <Header />
+      <MenuPage />
       <Footer />
     </div>
   );
