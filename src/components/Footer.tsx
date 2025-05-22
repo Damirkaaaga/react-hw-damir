@@ -1,7 +1,12 @@
 import React from "react";
 import "./Footer.css";
 
-const footerLinks = [
+type FooterLink = {
+  title: string;
+  items: string[];
+};
+
+const footerLinks: FooterLink[] = [
   {
     title: "Company",
     items: ["Home", "Order", "FAQ", "Contact"],
@@ -16,7 +21,7 @@ const footerLinks = [
   },
 ];
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-container">

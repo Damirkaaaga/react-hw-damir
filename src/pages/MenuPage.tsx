@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import MenuItem from "../components/MenuItem";
-import Tooltip from "../components/Tooltip";
+import Footer from "../components/Footer.tsx";
+import MenuItem from "../components/MenuItem.tsx";
+import Tooltip from "../components/Tooltip.tsx";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store/store.ts";
+import { addToCart } from "../store/slices/cartSlice.ts";
 import "./menu.css";
 
-const MenuPage = () => {
-  const [meals, setMeals] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [cart, setCart] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState("");
+type Meal = {
+  id: string;
+  meal: string;
+  img: string;
+  price: number;
+  area?: string;
+  category: string;
+};
+
+const MenuPage: React.FC = () => {
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [visibleCount, setVisibleCount] = useState<number>(6);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.items);
+  const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
   useEffect(() => {
     fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: Meal[]) => {
         setMeals(data);
 
         const availableCategories = [
@@ -29,11 +43,8 @@ const MenuPage = () => {
       });
   }, []);
 
-  const handleAddToCart = (id) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [id]: (prevCart[id] || 0) + 1,
-    }));
+  const handleAddToCart = (id: string) => {
+    dispatch(addToCart(id));
   };
 
   const handleSeeMore = () => {
@@ -45,11 +56,9 @@ const MenuPage = () => {
   );
 
   const visibleItems = filteredMeals.slice(0, visibleCount);
-  const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
   return (
     <>
-      <Header totalItems={totalItems} />
       <main className="menu-wrapper">
         <div className="menu-container">
           <div className="menu-inner">
@@ -63,50 +72,27 @@ const MenuPage = () => {
             </p>
 
             <div className="menu-buttons">
-              <button
-                className={`menu-btn ${
-                  selectedCategory === "Dessert" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedCategory("Dessert");
-                  setVisibleCount(6);
-                }}
-              >
-                Dessert
-              </button>
-              <button
-                className={`menu-btn ${
-                  selectedCategory === "Dinner" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedCategory("Dinner");
-                  setVisibleCount(6);
-                }}
-              >
-                Dinner
-              </button>
-              <button
-                className={`menu-btn ${
-                  selectedCategory === "Breakfast" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedCategory("Breakfast");
-                  setVisibleCount(6);
-                }}
-              >
-                Breakfast
-              </button>
+              {["Dessert", "Dinner", "Breakfast"].map((category) => (
+                <button
+                  key={category}
+                  className={`menu-btn ${
+                    selectedCategory === category ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setVisibleCount(6);
+                  }}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
 
             <div className="menu-items">
               {visibleItems.map((item) => (
                 <MenuItem
                   key={item.id}
-                  title={item.meal}
-                  image={item.img}
-                  price={item.price}
-                  area={item.area}
-                  category={item.category}
+                  meal={item}
                   quantity={cart[item.id] || 0}
                   onAddToCart={() => handleAddToCart(item.id)}
                 />

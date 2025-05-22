@@ -1,7 +1,12 @@
 import React from "react";
 import "./Header.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
-const Header = ({ totalItems }) => {
+const Header: React.FC = () => {
+  const cart = useSelector((state: RootState) => state.cart.items);
+  const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+
   return (
     <header className="header">
       <div className="header-container">
