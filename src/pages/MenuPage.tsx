@@ -92,11 +92,7 @@ const MenuPage: React.FC = () => {
               {visibleItems.map((item) => (
                 <MenuItem
                   key={item.id}
-                  title={item.meal}
-                  image={item.img}
-                  price={item.price}
-                  area={item.area}
-                  category={item.category}
+                  meal={item}
                   quantity={cart[item.id] || 0}
                   onAddToCart={() => handleAddToCart(item.id)}
                 />

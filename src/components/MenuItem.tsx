@@ -1,38 +1,35 @@
 import React from "react";
 import "./MenuItem.css";
 
-type MenuItemProps = {
-  image: string;
-  title: string;
+type Meal = {
+  id: string;
+  meal: string;
+  img: string;
   price: number;
-  quantity: number;
-  onAddToCart: () => void;
   area?: string;
-  category?: string;
+  category: string;
 };
 
-const MenuItem: React.FC<MenuItemProps> = ({
-  image,
-  title,
-  price,
-  onAddToCart,
-  quantity,
-  area,
-  category,
-}) => {
+type MenuItemProps = {
+  meal: Meal;
+  quantity: number;
+  onAddToCart: () => void;
+};
+
+const MenuItem: React.FC<MenuItemProps> = ({ meal, quantity, onAddToCart }) => {
   return (
     <div className="menu-item">
-      <img src={image} alt={title} className="menu-item-image" />
+      <img src={meal.img} alt={meal.meal} className="menu-item-image" />
       <div className="menu-item-content">
         <div className="menu-item-header">
-          <h3 className="menu-item-title">{title}</h3>
-          <span className="menu-item-price">${price.toFixed(2)} USD</span>
+          <h3 className="menu-item-title">{meal.meal}</h3>
+          <span className="menu-item-price">${meal.price.toFixed(2)} USD</span>
         </div>
 
         <p className="menu-item-description">
-          {area && category
-            ? `${area} ${category}`
-            : category || area || "Meal"}
+          {meal.area && meal.category
+            ? `${meal.area} ${meal.category}`
+            : meal.category || meal.area || "Meal"}
         </p>
 
         <div className="menu-item-bottom">
