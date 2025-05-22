@@ -3,8 +3,8 @@ import Footer from "../components/Footer.tsx";
 import MenuItem from "../components/MenuItem.tsx";
 import Tooltip from "../components/Tooltip.tsx";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { addToCart } from "../redux/cartSlice";
+import { RootState } from "../store/store.ts";
+import { addToCart } from "../store/slices/cartSlice.ts";
 import "./menu.css";
 
 type Meal = {
