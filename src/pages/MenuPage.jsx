@@ -49,7 +49,6 @@ const MenuPage = () => {
 
   return (
     <>
-      <Header totalItems={totalItems} />
       <main className="menu-wrapper">
         <div className="menu-container">
           <div className="menu-inner">
@@ -145,7 +144,6 @@ const MenuPage = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 };
