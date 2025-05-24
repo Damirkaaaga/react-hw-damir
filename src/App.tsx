@@ -1,15 +1,24 @@
 import React from "react";
-import Header from "./components/Header.tsx";
-import Footer from "./components/Footer.tsx";
-import MenuPage from "./pages/MenuPage.tsx"; 
+import { Routes, Route, Navigate } from "react-router-dom";
+import MenuPage from "./pages/Menu/MenuPage.tsx";
+import OrderPage from "./pages/Order/OrderPage.tsx";
+import LoginPage from "./pages/Login/LoginPage";
+import HomePage from "./pages/Home/HomePage.tsx";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   return (
-    <div>
+    <>
       <Header />
-      <MenuPage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
       <Footer />
-    </div>
+    </>
   );
 };
 

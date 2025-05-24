@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -15,10 +16,18 @@ const Header: React.FC = () => {
         </div>
 
         <nav className="header-nav">
-          <span className="nav-item">Home</span>
-          <span className="nav-item active">Menu</span>
-          <span className="nav-item">Company</span>
-          <span className="nav-item login">Login</span>
+          <Link to="/" className="nav-item">
+            Home
+          </Link>
+          <Link to="/menu" className="nav-item">
+            Menu
+          </Link>
+          <Link to="/company" className="nav-item">
+            Company
+          </Link>
+          <Link to="/login" className="nav-item login">
+            Login
+          </Link>
 
           <div className="cart">
             <img
