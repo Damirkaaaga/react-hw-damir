@@ -97,7 +97,6 @@ const ImageBlock = styled.div`
 export default function HomePage() {
   return (
     <>
-      <Header totalItems={0} />
       <BgContainer>
         <ContentWrapper>
           <TextBlock>
@@ -124,7 +123,6 @@ export default function HomePage() {
           </ImageBlock>
         </ContentWrapper>
       </BgContainer>
-      <Footer />
     </>
   );
 }
