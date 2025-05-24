@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.tsx";
-import MenuItem from "../components/MenuItem.tsx";
-import Tooltip from "../components/Tooltip.tsx";
+import MenuItem from "../../components/MenuItem.tsx";
+import Tooltip from "../../components/Tooltip.tsx";
 import "./menu.css";
 
 type Meal = {
@@ -62,7 +60,6 @@ const MenuPage: React.FC = () => {
 
   return (
     <>
-      <Header totalItems={totalItems} />
       <main className="menu-wrapper">
         <div className="menu-container">
           <div className="menu-inner">
@@ -135,7 +132,6 @@ const MenuPage: React.FC = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 };

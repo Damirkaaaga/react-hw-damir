@@ -1,15 +1,29 @@
 import React from "react";
-import LoginPage from "./pages/Login/LoginPage.tsx";
-import Header from "./components/Header.tsx";
-import Footer from "./components/Footer.tsx";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import LoginPage from "./pages/Login/LoginPage";
+import HomePage from "./pages/Home/HomePage";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const App: React.FC = () => {
   return (
-    <div>
+    <>
       <Header totalItems={0} />
-      <LoginPage />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
       <Footer />
-    </div>
+    </>
   );
 };
 
