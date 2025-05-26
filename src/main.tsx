@@ -5,6 +5,7 @@ import "./index.css";
 
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import { BrowserRouter } from "react-router-dom";
 
 const rootElement = document.getElementById("root");
 
@@ -12,7 +13,9 @@ if (rootElement) {
   ReactDOM.createRoot(rootElement as HTMLElement).render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>
   );

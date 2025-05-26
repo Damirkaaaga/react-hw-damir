@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../components/Footer.tsx";
 
 const BgContainer = styled.div`
   position: relative;
@@ -122,7 +121,6 @@ const HomePage: React.FC = () => {
           </ImageBlock>
         </ContentWrapper>
       </BgContainer>
-      <Footer />
     </>
   );
 };

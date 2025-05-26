@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Footer from "../components/Footer.tsx";
-import MenuItem from "../components/MenuItem.tsx";
-import Tooltip from "../components/Tooltip.tsx";
+import MenuItem from "../../components/MenuItem.tsx";
+import Tooltip from "../../components/Tooltip.tsx";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store/store.ts";
-import { addToCart } from "../store/slices/cartSlice.ts";
+import { RootState } from "../../store/store.ts";
+import { addToCart } from "../../store/slices/cartSlice.ts";
 import "./menu.css";
 
 type Meal = {
@@ -131,7 +130,6 @@ const MenuPage: React.FC = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 };
