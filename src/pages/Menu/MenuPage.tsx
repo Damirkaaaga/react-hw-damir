@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Footer from "../../components/Footer.tsx";
 import MenuItem from "../../components/MenuItem.tsx";
 import Tooltip from "../../components/Tooltip.tsx";
 import { useSelector, useDispatch } from "react-redux";

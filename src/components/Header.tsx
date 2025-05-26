@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./Header.css";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import "./Header.css";
 
 const Header: React.FC = () => {
   const cart = useSelector((state: RootState) => state.cart.items);
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <header className="header">
@@ -16,27 +18,28 @@ const Header: React.FC = () => {
         </div>
 
         <nav className="header-nav">
-          <Link to="/" className="nav-item">
+          <NavLink to="/" className="nav-item">
             Home
-          </Link>
-          <Link to="/menu" className="nav-item">
+          </NavLink>
+          <NavLink to="/menu" className="nav-item">
             Menu
-          </Link>
-          <Link to="/company" className="nav-item">
+          </NavLink>
+          <NavLink to="/company" className="nav-item">
             Company
-          </Link>
-          <Link to="/login" className="nav-item login">
-            Login
-          </Link>
+          </NavLink>
 
-          <div className="cart">
+          <NavLink to="/login" className="nav-item login">
+            {user ? user : "Login"}
+          </NavLink>
+
+          <NavLink to="/order" className="cart">
             <img
               src="src/public/Vector.svg"
               alt="basket"
               className="cart-icon"
             />
             <span className="cart-badge">{totalItems}</span>
-          </div>
+          </NavLink>
         </nav>
       </div>
     </header>

@@ -1,3 +1,20 @@
+.order-container {
+  position: relative;
+  background-color: #f5fbfc;
+  font-family: "Inter", sans-serif;
+}
+
+.background-angle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #ffffff;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+  z-index: 0;
+}
+
 .order-page {
   background-color: #f5fbfc;
   padding: 88px 0;
@@ -8,9 +25,11 @@
 }
 
 .order-title {
-  font-size: 32px;
+  font-size: 50px;
   color: #35b8be;
   margin-bottom: 40px;
+  font-weight: 400;
+  letter-spacing: 1.65px;
 }
 
 .order-list {
@@ -34,6 +53,7 @@
   height: 120px;
   object-fit: cover;
   margin-right: 20px;
+  padding-left: 20px;
 }
 
 .order-info {
@@ -53,6 +73,12 @@
   color: #35b8be;
 }
 
+.order-controls {
+  display: flex;
+  align-items: center;
+  gap: 57px;
+}
+
 .order-quantity {
   width: 60px;
   height: 45px;
@@ -66,6 +92,8 @@
 .order-remove {
   width: 60px;
   height: 45px;
+  margin-left: 20px;
+  margin-right: 15px;
   background-color: #35b8be;
   border: none;
   border-radius: 6px;
