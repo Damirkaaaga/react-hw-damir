@@ -130,7 +130,6 @@ const MenuPage: React.FC = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 };
