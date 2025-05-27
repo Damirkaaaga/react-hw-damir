@@ -15,7 +15,7 @@ const BgContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: #f5fbfc;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 75%);
+    clip-path: polygon(0 7.5%, 100% 0, 100% 100%, 0 100%);
     z-index: 0;
   }
 `;
