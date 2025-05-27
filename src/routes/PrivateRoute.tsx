@@ -1,19 +1,23 @@
-import React from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
-const PrivateRoute = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(null);
+interface PrivateRouteProps {
+  children: JSX.Element;
+}
 
-  React.useEffect(() => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
     });
     return () => unsubscribe();
   }, []);
 
-  if (isAuthenticated === null) return null; // можно показать прелоадер
+  if (isAuthenticated === null) return null;
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };

@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { useNavigate, Navigate } from "react-router-dom";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  User,
+} from "firebase/auth";
+import { Navigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import useLogger from "../../hooks/useLogger";
 import "./LoginPage.css";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
-  const [checkingAuth, setCheckingAuth] = useState(true); 
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       if (currentUser) {
-        setUser(currentUser);
         useLogger("AutoLogin", { email: currentUser.email });
-      } else {
-        setUser(null);
       }
-      setCheckingAuth(false);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email.includes("@") || !email.includes(".")) {
+      alert("Enter correct email");
+      return;
+    }
 
-    if (!email.includes("@") || password.length < 6) {
-      alert("Please enter a valid email and password (min 6 characters)");
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long");
       return;
     }
 
@@ -40,25 +46,18 @@ const LoginPage = () => {
         password
       );
       setUser(userCredential.user);
+      alert("Login successful");
       useLogger("LoginSuccess", { email });
-      navigate("/"); 
-    } catch (error) {
-      console.error("Login error:", error.message);
-      alert("Login failed: " + error.message);
-      useLogger("LoginError", { email, error: error.message });
+    } catch (error: unknown) {
+      const err = error as { message: string };
+      console.error("Login error:", err.message);
+      alert("Login failed: " + err.message);
+      useLogger("LoginError", { email, error: err.message });
     }
   };
 
-  const handleLogout = () => {
-    auth.signOut();
-    useLogger("Logout", { email: user.email });
-  };
-
-  if (checkingAuth) return null;
-
-
-  if (user) {
-    return <Navigate to="/" replace />;
+  if (!loading && user) {
+    return <Navigate to="/home" />;
   }
 
   return (

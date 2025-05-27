@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 const BgContainer = styled.div`
   position: relative;
@@ -17,7 +15,7 @@ const BgContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: #f5fbfc;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 75%);
+    clip-path: polygon(0 7.5%, 100% 0, 100% 100%, 0 100%);
     z-index: 0;
   }
 `;
@@ -94,35 +92,35 @@ const ImageBlock = styled.div`
   }
 `;
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
   return (
-    <>
-      <BgContainer>
-        <ContentWrapper>
-          <TextBlock>
-            <Headline>
-              Beautiful food & takeaway, <span>delivered</span> to your door.
-            </Headline>
-            <Subtext>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500.
-            </Subtext>
-            <DisabledButton disabled>Place an Order</DisabledButton>
-            <ReviewSection>
-              <strong>
-                <span style={{ color: "#00B67A" }}>★</span> Trustpilot
-              </strong>
-              <br />
-              <span>4.8 out of 5</span> based on 2000+ reviews
-            </ReviewSection>
-          </TextBlock>
+    <BgContainer>
+      <ContentWrapper>
+        <TextBlock>
+          <Headline>
+            Beautiful food & takeaway, <span>delivered</span> to your door.
+          </Headline>
+          <Subtext>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500.
+          </Subtext>
+          <DisabledButton disabled>Place an Order</DisabledButton>
+          <ReviewSection>
+            <strong>
+              <span style={{ color: "#00B67A" }}>★</span> Trustpilot
+            </strong>
+            <br />
+            <span>4.8 out of 5</span> based on 2000+ reviews
+          </ReviewSection>
+        </TextBlock>
 
-          <ImageBlock>
-            <img src="src/public/imageHomePage.svg" alt="Delicious food" />
-          </ImageBlock>
-        </ContentWrapper>
-      </BgContainer>
-    </>
+        <ImageBlock>
+          <img src="src/public/imageHomePage.svg" alt="Delicious food" />
+        </ImageBlock>
+      </ContentWrapper>
+    </BgContainer>
   );
-}
+};
+
+export default HomePage;
