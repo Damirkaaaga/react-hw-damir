@@ -3,28 +3,28 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/Login/LoginPage";
-import HomePage from "./pages/HomePage.jsx";
-import PrivateRoute from "./Routes/PrivateRoute.jsx"; // добавь
+import HomePage from "./pages/Home/HomePage";
+import PrivateRoute from "./routes/PrivateRoute";
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header totalItems={0} />
       <Routes>
+        <Route path="/" element={<LoginPage />} />
         <Route
-          path="/"
+          path="/home"
           element={
             <PrivateRoute>
               <HomePage />
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
     </>
   );
-}
+};
 
 export default App;
