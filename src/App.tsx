@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/Login/LoginPage";
 import HomePage from "./pages/Home/HomePage";
+import MenuPage from "./pages/Menu/MenuPage";
 import PrivateRoute from "./routes/PrivateRoute";
 
 const App: React.FC = () => {
@@ -17,6 +18,14 @@ const App: React.FC = () => {
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <PrivateRoute>
+              <MenuPage />
             </PrivateRoute>
           }
         />

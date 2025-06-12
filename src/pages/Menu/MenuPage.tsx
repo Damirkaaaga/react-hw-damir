@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import MenuItem from "../../components/MenuItem.tsx";
 import Tooltip from "../../components/Tooltip.tsx";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store.ts";
+import { addToCart } from "../../store/slices/cartSlice.ts";
 import "./menu.css";
 
 type Meal = {
@@ -12,15 +15,14 @@ type Meal = {
   category: string;
 };
 
-type Cart = {
-  [mealId: string]: number;
-};
-
 const MenuPage: React.FC = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [visibleCount, setVisibleCount] = useState<number>(6);
-  const [cart, setCart] = useState<Cart>({});
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.items);
+  const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
   useEffect(() => {
     fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
@@ -41,10 +43,7 @@ const MenuPage: React.FC = () => {
   }, []);
 
   const handleAddToCart = (id: string) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [id]: (prevCart[id] || 0) + 1,
-    }));
+    dispatch(addToCart(id));
   };
 
   const handleSeeMore = () => {
@@ -56,7 +55,6 @@ const MenuPage: React.FC = () => {
   );
 
   const visibleItems = filteredMeals.slice(0, visibleCount);
-  const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
   return (
     <>
