@@ -1,7 +1,11 @@
 import React from "react";
 import "./Header.css";
 
-const Header = ({ totalItems }) => {
+type HeaderProps = {
+  totalItems: number;
+};
+
+const Header: React.FC<HeaderProps> = ({ totalItems }) => {
   return (
     <header className="header">
       <div className="header-container">
