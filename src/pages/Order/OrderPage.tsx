@@ -13,7 +13,7 @@ const OrderPage: React.FC = () => {
   }, [dispatch]);
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const meals = useSelector((state: RootState) => state.meals.meals);
+  const meals = useSelector((state: RootState) => state.meals.items);
 
   return (
     <div className="order-container">

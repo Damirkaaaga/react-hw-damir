@@ -1,46 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MenuItem from "../../components/MenuItem.tsx";
 import Tooltip from "../../components/Tooltip.tsx";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store.ts";
 import { addToCart } from "../../store/slices/cartSlice.ts";
+import { fetchMeals } from "../../store/slices/mealsSlice";
+import { AppDispatch } from "../../store/store";
+import { Meal } from "../../types/Meal";
 import "./menu.css";
 
-type Meal = {
-  id: string;
-  meal: string;
-  img: string;
-  price: number;
-  area?: string;
-  category: string;
-};
-
 const MenuPage: React.FC = () => {
-  const [meals, setMeals] = useState<Meal[]>([]);
   const [visibleCount, setVisibleCount] = useState<number>(6);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
-  const dispatch = useDispatch();
+  const meals = useSelector((state: RootState) => state.meals.items);
+  const mealsStatus = useSelector((state: RootState) => state.meals.status);
+  const dispatch: AppDispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.items);
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
   useEffect(() => {
-    fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
-      .then((res) => res.json())
-      .then((data: Meal[]) => {
-        setMeals(data);
-
-        const availableCategories = [
-          ...new Set(data.map((item) => item.category)),
-        ];
-
-        if (availableCategories.includes("Dessert")) {
-          setSelectedCategory("Dessert");
-        } else {
-          setSelectedCategory(availableCategories[0] || "");
-        }
-      });
-  }, []);
+    if (mealsStatus === "idle") {
+      dispatch(fetchMeals());
+    }
+  }, [mealsStatus, dispatch]);
 
   const handleAddToCart = (id: string) => {
     dispatch(addToCart(id));
@@ -71,20 +54,22 @@ const MenuPage: React.FC = () => {
             </p>
 
             <div className="menu-buttons">
-              {["Dessert", "Dinner", "Breakfast"].map((category) => (
-                <button
-                  key={category}
-                  className={`menu-btn ${
-                    selectedCategory === category ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    setSelectedCategory(category);
-                    setVisibleCount(6);
-                  }}
-                >
-                  {category}
-                </button>
-              ))}
+              {Array.from(new Set(meals.map((item) => item.category))).map(
+                (category) => (
+                  <button
+                    key={category}
+                    className={`menu-btn ${
+                      selectedCategory === category ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setVisibleCount(6);
+                    }}
+                  >
+                    {category}
+                  </button>
+                )
+              )}
             </div>
 
             <div className="menu-items">

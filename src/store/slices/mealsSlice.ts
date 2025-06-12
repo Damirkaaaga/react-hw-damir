@@ -1,34 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Meal } from "../../types/Meal";
 
 export const fetchMeals = createAsyncThunk("meals/fetchMeals", async () => {
   const response = await fetch(
     "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals"
   );
-  return await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch meals");
+  }
+  const data: Meal[] = await response.json();
+  return data;
 });
-
-interface Meal {
-  id: string;
-  meal: string;
-  img: string;
-  price: number;
-  area?: string;
-  category: string;
-}
-
-interface MealsState {
-  meals: Meal[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-}
-
-const initialState: MealsState = {
-  meals: [],
-  status: "idle",
-};
 
 const mealsSlice = createSlice({
   name: "meals",
-  initialState,
+  initialState: {
+    items: [] as Meal[],
+    status: "idle",
+    error: null as string | null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -37,10 +27,11 @@ const mealsSlice = createSlice({
       })
       .addCase(fetchMeals.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.meals = action.payload;
+        state.items = action.payload;
       })
-      .addCase(fetchMeals.rejected, (state) => {
+      .addCase(fetchMeals.rejected, (state, action) => {
         state.status = "failed";
+        state.error = action.error.message || "Failed to fetch meals";
       });
   },
 });
