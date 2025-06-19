@@ -17,7 +17,7 @@ const OrderPage: React.FC = () => {
 
   return (
     <div className="order-container">
-      <div className="background-angle"></div>{" "}
+      <div className="background-angle"></div>
       <div className="order-page">
         <h2 className="order-title">Finish your order</h2>
 

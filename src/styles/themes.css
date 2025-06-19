@@ -1,0 +1,33 @@
+.light-theme {
+  --header-bg: #ffffff;
+  --footer-bg: #f5fbfc;
+  --footer-bg-image: url("src/public/footer.svg");
+  --bg-color: #f5fbfc;
+  --text-color: #08090a;
+  --muted-text-color: #546285;
+  --header-bg: #ffffff;
+  --box-bg: #ffffff;
+  --border-color: #cccccc;
+  --button-bg: #35b8be;
+  --button-text: #ffffff;
+  --input-bg: #fafafa;
+  --accent-color: #35b8be;
+  --icon-filter: none;
+}
+
+.dark-theme {
+  --header-bg: #2a2d31;
+  --footer-bg: #1c1e21;
+  --footer-bg-image: none;
+  --bg-color: #1c1e21;
+  --text-color: #ffffff;
+  --muted-text-color: #a0a0a0;
+  --header-bg: #2a2d31;
+  --box-bg: #33383e;
+  --border-color: #888888;
+  --button-bg: #35b8be;
+  --button-text: #000000;
+  --input-bg: #2a2d31;
+  --accent-color: #35b8be;
+  --icon-filter: invert(1);
+}

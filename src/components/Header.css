@@ -1,5 +1,5 @@
 .header {
-  background-color: white;
+  background-color: var(--header-bg);
 }
 
 .header-container {
@@ -34,23 +34,28 @@
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
-  color: #28224b;
+  color: var(--text-color);
 }
 
 .nav-item.active {
-  color: #35b8be;
+  color: var(--accent-color);
 }
 
 .nav-item.login {
   width: 94px;
   font-size: 16px;
   margin-right: 102px;
+  color: var(--text-color);
+}
+
+.nav-item.login.active {
+  color: var(--accent-color);
 }
 
 .cart {
   width: 55px;
   height: 55px;
-  background-color: #35b8be;
+  background-color: var(--button-bg);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -67,8 +72,8 @@
 .cart-badge {
   width: 25px;
   height: 25px;
-  background: #fff;
-  color: #35b8be;
+  background: var(--badge-bg, #fff);
+  color: var(--button-bg);
   font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -79,4 +84,12 @@
   top: -8px;
   right: -8px;
   box-shadow: 7px 7px 25px rgba(126, 130, 143, 0.27);
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 12px;
 }

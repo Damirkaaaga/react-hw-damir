@@ -17,7 +17,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  if (isAuthenticated === null) return null; 
+  if (isAuthenticated === null) return null;
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };

@@ -42,6 +42,7 @@ const MenuPage: React.FC = () => {
   return (
     <>
       <main className="menu-wrapper">
+        <div className="background-angle" />
         <div className="menu-container">
           <div className="menu-inner">
             <h2 className="menu-title">Browse our menu</h2>

@@ -1,10 +1,12 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import "./Header.css";
 
 const Header: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const cart = useSelector((state: RootState) => state.cart.items);
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
@@ -18,21 +20,43 @@ const Header: React.FC = () => {
         </div>
 
         <nav className="header-nav">
-          <NavLink to="/" className="nav-item">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              "nav-item" + (isActive ? " active" : "")
+            }
+          >
             Home
           </NavLink>
-          <NavLink to="/menu" className="nav-item">
+          <NavLink
+            to="/menu"
+            className={({ isActive }) =>
+              "nav-item" + (isActive ? " active" : "")
+            }
+          >
             Menu
           </NavLink>
-          <NavLink to="/company" className="nav-item">
+          <NavLink
+            to="/company"
+            className={({ isActive }) =>
+              "nav-item" + (isActive ? " active" : "")
+            }
+          >
             Company
           </NavLink>
 
-          <NavLink to="/login" className="nav-item login">
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              "nav-item login" + (isActive ? " active" : "")
+            }
+          >
             {user ? user : "Login"}
           </NavLink>
-
-          <NavLink to="/order" className="cart">
+          <NavLink
+            to="/order"
+            className={({ isActive }) => "cart" + (isActive ? " active" : "")}
+          >
             <img
               src="src/public/Vector.svg"
               alt="basket"
@@ -40,6 +64,9 @@ const Header: React.FC = () => {
             />
             <span className="cart-badge">{totalItems}</span>
           </NavLink>
+          <button onClick={toggleTheme} className="theme-toggle-btn">
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
         </nav>
       </div>
     </header>

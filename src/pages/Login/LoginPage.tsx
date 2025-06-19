@@ -74,7 +74,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-wrapper">
-      <div className="background-angle"></div>
+      <div className="background-angle" />
       <h1 className="login-title">Log in</h1>
       <div className="login-box">
         <form onSubmit={handleLogin}>
